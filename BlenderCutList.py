@@ -113,6 +113,6 @@ for sel in selection:
                 blacklist.append(s.name)
                 quantity += 1
         # Adiciona a linha ao csv
-        file.write(f"{quantity}, {wooden_piece.width}, {wooden_piece.height}, {wooden_piece.name}, {wooden_piece.edge_tapes.c1}, {wooden_piece.edge_tapes.c2}, {wooden_piece.edge_tapes.l1}, {wooden_piece.edge_tapes.l2}, {wooden_piece.material}, {wooden_piece.comments}\n")
+        file.write(f"{quantity}, {wooden_piece.width}, {wooden_piece.height}, {wooden_piece.name}, {wooden_piece.edge_tapes.c1 or ''}, {wooden_piece.edge_tapes.c2 or ''}, {wooden_piece.edge_tapes.l1 or ''}, {wooden_piece.edge_tapes.l2 or ''}, {wooden_piece.material}, {wooden_piece.comments or ''}\n")
 
 file.close()
