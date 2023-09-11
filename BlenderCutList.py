@@ -46,7 +46,7 @@ class EdgeTapes:
     def __init__(self, material_names):
         def get_tape_material(tape_identifier:str):
             l = [m for m in material_names if tape_identifier in m]
-            return l[0] if len(l) > 0 else None
+            return l[0].replace(tape_identifier, '').strip() if len(l) > 0 else None
             
         # Verifica se existem algum material com as palavras chaves
         self.c1 = get_tape_material('C1')
