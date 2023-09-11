@@ -30,12 +30,33 @@
 
 # Importando a API do blender
 import bpy, os, re
-
+# Atualizando para correção de medidas em script em relação ao viweport
+bpy.context.view_layer.update()
+# Configurações de ambiente para melhor uso em móveis e precisão
+unit_settings = bpy.context.scene.unit_settings
+unit_settings.system = 'METRIC'
+unit_settings.scale_length = 0.001
+unit_settings.length_unit = 'MILLIMETERS'
+unit_settings.system_rotation = 'DEGREES'
+# Cada cena é composta de várias áreas/janelas
+areas = [a for a in bpy.context.screen.areas if a.type == 'VIEW_3D']
+spaces = [s for s in areas if s.type == 'VIEW_3D']
+workspace = None
+for area in areas:
+    for s in area.spaces:
+        if s.type == 'VIEW_3D':
+            s.shading.type = 'SOLID'
+            s.shading.show_xray = True
+            s.overlay.grid_scale = 0.001
+            s.clip_end = 1000000
+# Alterando o clipping point da camera ativa, caso exista uma
+if bpy.context.scene.camera:
+    bpy.context.scene.camera.data.clip_end = 1000000
 # Captura apenas a seleção, gosto de utilizar coleções de madeira e outras de outros materiais, dessa forma fica fácil selecionar apenas os itens de madeira
 selection = bpy.context.selected_objects
 
 # Arquivo de saída (edite aqui)
-output_file = "Desktop/CutList.csv"
+output_file = 'Desktop/CutList.csv'
 # string zerada para popular com dados csv
 csv_output = ""
 # lista de nome de objetos que não deverão ser analisados, pois são duplicatas de outros objetos. São esses os de final *.001, *.002 ...
@@ -104,9 +125,9 @@ file.write("Quantidade, Comprimento, Largura, Função, Fita C1, Fita C2, Fita L
 # iterate through the selected objects
 for sel in selection:
     if sel.name not in blacklist:
-        quantity = 0
+        quantity = 1
         # captura o nome e as dimensões da peça selecionada
-        wooden_piece = WoodenPiece(name=sel.name, dimensions=[int(sel.dimensions.x*1000), int(sel.dimensions.y*1000), int(sel.dimensions.z*1000)], material_names=[m.name for m in sel.material_slots], comments=sel['comments'] if 'comments' in sel else None)
+        wooden_piece = WoodenPiece(name=sel.name, dimensions=[int(sel.dimensions.x), int(sel.dimensions.y), int(sel.dimensions.z)], material_names=[m.name for m in sel.material_slots], comments=sel['comments'] if 'comments' in sel else None)
         # Verifica se temos outra peça com o mesmo nome e *.001 para adicionar na quantidade
         for s in selection:
             if(re.search(sel.name+r"\.\d{3}$", s.name)):

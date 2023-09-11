@@ -5,12 +5,20 @@ Após procurar minhas opções de criar um projeto em MDF notei que a maioria do
 # Como usar
 
 1. Abra o Blender, de preferência pelo terminal se quiser debugar o script e carregue o script na aba de `Editor`
+```sh
+cd /Applications/Blender.app/Contents/MacOs
+./Blender
+```
 2. Crie os objetos seguindo o padrão de medida em metros
 3. Dê um nome à peça, esse nome deve ser a função que a peça ocupa no projeto, por exemplo: "Lateral da Caixa", peças duplicadas terão suaquantidade incrementada, por exemplo: "Lateral da Caixa" e "Lateral da Caixa.001" se tornará 2 x "Lateral da Caixa"
 4. Altere no script `output_file` para o seu arquivo de saída desejado
 5. Selecione os objetos que quer exportar
 6. Rode o script
 7. Faça o upload do arquivo no CorteCloud
+
+# Bugs
+
+- Observa-se que nem sempre há uma precisão da última casa decimal, não sei se persistirá nos próximos projetos
 
 # Roadmap
 
