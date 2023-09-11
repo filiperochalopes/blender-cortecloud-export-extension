@@ -1,8 +1,17 @@
-# Blender-Cut-List
-Python Code to create a woodworking cut list in excel format from a 3D drawing in Blender using the Blender API
-Definition: A cut list for a Woodworking project is the Bill of Materials for all the pieces of wood that need to be cut before assembly. 
-Purpose: A python script that iterates through each mesh object in a blender 3d drawing creating a CSV formatted Cut List to be formatted / modified in excel.   
-Background: The most popular wordworking design software is SketchUp.  SketchUp is fairly easy to use and does have Cut List functionality.  Most wood working projects are done in SketchUp.  But, the design I started from was created in Blender.  Blender is an open source 3D modeling and creation suite of software.  Blender can even render 3D for movie animation and games.  So, my first hurdle was to learn Blender to modify the model for my 2020 Toyota Tundra Truck Cap Camper Furniture.  There were hundreds of pieces to be cut.  I was not up for manually creating the cut list; it would have been a herculean task and the penalty for failure is significant.  I said to myself, “There must be an automated way to do a cut list.”
-Programming Notes: Of course, writing the code to automate this cut list task took 10 times more time than it would have just to type out the cut list manually.  So hopefully this will save you a ton of time by using it. I’m a .NET guy.  I had barely even looked at Python before I started this project.  But, I’m an engineer by trade so it was totally like me to jump in and to over-engineer this.  I assumed someone would have done something similar to this already that I could cheat from: not really.  I also assumed I’d find a ton of sample code in python that used the blender API and object model: not really.  But, my success is directly related to the blender object model, API and real time interpreter.  and how awesomely simple, easy and powerful python is.  
-As in any piece of software; software is never done.  you can always improve it.  I learned that in school 3 decades ago.  I cannot think of any feature adds that have enough priority to do now.  I have not tested this with a lot of drawings.  I’m sure rigorous testing with other drawings will manifest bugs / issues to be overcome.  There are little annoyances I didn’t get around to fixing.  For, instance, it seems the cameras and lights are mesh objects.  So they output to the cut list.  It’s pretty obvious when you see them in excel that they don’t belong so easy to delete.  
-Use: Open a 3D drawing in Blender.  Chose “Scripting” from the main menu.  You’ll see a command prompt on the bottom left.  Paste the code into that command prompt window and press Enter.  The program will execute and output to the command prompt window.  It will write a file called “cut-list.csv” in …\my documents\ that can be opened in excel.  The First thing to do in excel is to choose “Data” from the menu.   Then choose “Filter”.  This will put the spreadsheet in a form when you can easily sort by any column.
+# Plano de corte com Blender
+
+Após procurar minhas opções de criar um projeto em MDF notei que a maioria dos programas que são verdadeiramente úteis são pagos. Como sou hobbysta e queria fazer os móveis de minha casa, a começar pela montagem de [minha cama de parede](https://www.orangebed.com.br/pt-br). Em contato com a equipe [GMAD](https://www.gmad.com.br/gmad-feiradesantana) fui orientado no uso do [CorteCloud](https://cortecloud.com.br/) que tem suas especificações no uso de importação de arquivos de planilha para planos de corte, esse script visa se adequar às conformidades do CorteCloud utilizando um programa consagrado e OpenSource para desenvolvimento 3D, [Blender](https://www.blender.org/).
+
+# Como usar
+
+1. Abra o Blender, de preferência pelo terminal se quiser debugar o script e carregue o script na aba de `Editor`
+2. Crie os objetos seguindo o padrão de medida em metros
+3. Dê um nome à peça, esse nome deve ser a função que a peça ocupa no projeto, por exemplo: "Lateral da Caixa", peças duplicadas terão suaquantidade incrementada, por exemplo: "Lateral da Caixa" e "Lateral da Caixa.001" se tornará 2 x "Lateral da Caixa"
+4. Altere no script `output_file` para o seu arquivo de saída desejado
+5. Selecione os objetos que quer exportar
+6. Rode o script
+7. Faça o upload do arquivo no CorteCloud
+
+# Roadmap
+
+Transformar esse script em um plugin com seleção de pasta e arquivo csv que deve ser gerado, facilitando o flow.

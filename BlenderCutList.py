@@ -23,6 +23,7 @@
 # import the blender's python API and python's os module
 import bpy, os
 
+
 # select all the mesh objects in the scene
 objects = bpy.context.scene.objects
 for ob in objects:
