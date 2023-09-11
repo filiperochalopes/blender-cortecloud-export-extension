@@ -121,7 +121,7 @@ os.makedirs(os.path.dirname(filename), exist_ok=True)
 # open the file to write to
 file = open(filename, "w")
 # Escreve o cabeçalho do arquivo
-file.write("Quantidade, Comprimento, Largura, Função, Fita C1, Fita C2, Fita L1, Fita L2, Material, Complemento\n")
+file.write("Quantidade;Comprimento;Largura;Função;Fita C1;Fita C2;Fita L1;Fita L2;Material;Complemento\n")
 # iterate through the selected objects
 for sel in selection:
     if sel.name not in blacklist:
@@ -134,6 +134,6 @@ for sel in selection:
                 blacklist.append(s.name)
                 quantity += 1
         # Adiciona a linha ao csv
-        file.write(f"{quantity}, {wooden_piece.width}, {wooden_piece.height}, {wooden_piece.name}, {wooden_piece.edge_tapes.c1 or ''}, {wooden_piece.edge_tapes.c2 or ''}, {wooden_piece.edge_tapes.l1 or ''}, {wooden_piece.edge_tapes.l2 or ''}, {wooden_piece.material}, {wooden_piece.comments or ''}\n")
+        file.write(f"{quantity};{wooden_piece.width};{wooden_piece.height};{wooden_piece.name};{wooden_piece.edge_tapes.c1 or ''};{wooden_piece.edge_tapes.c2 or ''};{wooden_piece.edge_tapes.l1 or ''};{wooden_piece.edge_tapes.l2 or ''};{wooden_piece.material};{wooden_piece.comments or ''}\n")
 
 file.close()
