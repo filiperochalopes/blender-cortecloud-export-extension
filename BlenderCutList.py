@@ -30,8 +30,7 @@
 
 # Importando a API do blender
 import bpy, os, re
-# Atualizando para correção de medidas em script em relação ao viweport
-bpy.context.view_layer.update()
+
 # Configurações de ambiente para melhor uso em móveis e precisão
 unit_settings = bpy.context.scene.unit_settings
 unit_settings.system = 'METRIC'
@@ -52,6 +51,10 @@ for area in areas:
 # Alterando o clipping point da camera ativa, caso exista uma
 if bpy.context.scene.camera:
     bpy.context.scene.camera.data.clip_end = 1000000
+
+# Atualizando para correção de medidas em script em relação ao viweport
+bpy.context.view_layer.update()
+
 # Captura apenas a seleção, gosto de utilizar coleções de madeira e outras de outros materiais, dessa forma fica fácil selecionar apenas os itens de madeira
 selection = bpy.context.selected_objects
 
@@ -124,6 +127,8 @@ file = open(filename, "w")
 file.write("Quantidade;Comprimento;Largura;Função;Fita C1;Fita C2;Fita L1;Fita L2;Material;Complemento\n")
 # iterate through the selected objects
 for sel in selection:
+    if re.search(r"\.\d{3}$", sel.name):
+        continue
     if sel.name not in blacklist:
         quantity = 1
         # captura o nome e as dimensões da peça selecionada
