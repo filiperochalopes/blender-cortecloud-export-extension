@@ -31,30 +31,6 @@
 # Importando a API do blender
 import bpy, os, re
 
-# Configurações de ambiente para melhor uso em móveis e precisão
-unit_settings = bpy.context.scene.unit_settings
-unit_settings.system = 'METRIC'
-unit_settings.scale_length = 0.001
-unit_settings.length_unit = 'MILLIMETERS'
-unit_settings.system_rotation = 'DEGREES'
-# Cada cena é composta de várias áreas/janelas
-areas = [a for a in bpy.context.screen.areas if a.type == 'VIEW_3D']
-spaces = [s for s in areas if s.type == 'VIEW_3D']
-workspace = None
-for area in areas:
-    for s in area.spaces:
-        if s.type == 'VIEW_3D':
-            s.shading.type = 'SOLID'
-            s.shading.show_xray = True
-            s.overlay.grid_scale = 0.001
-            s.clip_end = 1000000
-# Alterando o clipping point da camera ativa, caso exista uma
-if bpy.context.scene.camera:
-    bpy.context.scene.camera.data.clip_end = 1000000
-
-# Atualizando para correção de medidas em script em relação ao viweport
-bpy.context.view_layer.update()
-
 # Captura apenas a seleção, gosto de utilizar coleções de madeira e outras de outros materiais, dessa forma fica fácil selecionar apenas os itens de madeira
 selection = bpy.context.selected_objects
 
@@ -92,9 +68,9 @@ class EdgeTapes:
         
 # classe para organizar as características de um corte do material
 class WoodenPiece:
-    def __init__(self, dimensions:list, material_names:list, name:str=None, comments:str=None):
+    def __init__(self, dimensions:list, material_names:list, name:str=None, notes:str=None):
         self.name = name
-        self.comments = comments
+        self.notes = notes
         self.thickness = min(dimensions)
         dimensions.remove(self.thickness)
         self.width = dimensions[0]
@@ -110,7 +86,7 @@ class WoodenPiece:
     
     def __str__(self):
         return f'''
-        Corte de MDF "{self.name}" - {self.comments} ({self.material})
+        Corte de MDF "{self.name}" - {self.notes} ({self.material})
         Dimensões (mm) {self.width}mm x {self.height}mm Espessura {self.thickness}mm
         Fitas: {self.edge_tapes}
         '''
@@ -132,13 +108,16 @@ for sel in selection:
     if sel.name not in blacklist:
         quantity = 1
         # captura o nome e as dimensões da peça selecionada
-        wooden_piece = WoodenPiece(name=sel.name, dimensions=[int(sel.dimensions.x), int(sel.dimensions.y), int(sel.dimensions.z)], material_names=[m.name for m in sel.material_slots], comments=sel['comments'] if 'comments' in sel else None)
+        wooden_piece = WoodenPiece(name=sel.name, dimensions=[int(sel.dimensions.x), int(sel.dimensions.y), int(sel.dimensions.z)], material_names=[m.name for m in sel.material_slots], notes=sel['notes'] if 'notes' in sel else None)
         # Verifica se temos outra peça com o mesmo nome e *.001 para adicionar na quantidade
         for s in selection:
             if(re.search(sel.name+r"\.\d{3}$", s.name)):
                 blacklist.append(s.name)
                 quantity += 1
+        # O comprimento deve ser sempre o maior tamanho, para que a idea ddas fitas funcionem
+        width = max(wooden_piece.width, wooden_piece.height)
+        height = min(wooden_piece.width, wooden_piece.height)
         # Adiciona a linha ao csv
-        file.write(f"{quantity};{wooden_piece.width};{wooden_piece.height};{wooden_piece.name};{wooden_piece.edge_tapes.c1 or ''};{wooden_piece.edge_tapes.c2 or ''};{wooden_piece.edge_tapes.l1 or ''};{wooden_piece.edge_tapes.l2 or ''};{wooden_piece.material};{wooden_piece.comments or ''}\n")
+        file.write(f"{quantity};{width};{height};{wooden_piece.name};{wooden_piece.edge_tapes.c1 or ''};{wooden_piece.edge_tapes.c2 or ''};{wooden_piece.edge_tapes.l1 or ''};{wooden_piece.edge_tapes.l2 or ''};{wooden_piece.material};{wooden_piece.notes or ''}\n")
 
 file.close()

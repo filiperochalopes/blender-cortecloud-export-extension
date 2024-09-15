@@ -20,7 +20,9 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-python.python"
+				"ms-python.python",
+				"wfnuser.vscode-ruff",
+				"codeium.codeium"
 			]
 		}
 	}
