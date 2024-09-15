@@ -18,8 +18,9 @@ cd /Applications/Blender.app/Contents/MacOs
 
 # Bugs
 
-- Observa-se que nem sempre há uma precisão da última casa decimal, não sei se persistirá nos próximos projetos
+- Observa-se que nem sempre há uma precisão da última casa decimal, não sei se persistirá nos próximos projetos. Aparentemente corrigido!
 
 # Roadmap
 
-Transformar esse script em um plugin com seleção de pasta e arquivo csv que deve ser gerado, facilitando o flow.
+- Transformar esse script em um plugin com seleção de pasta e arquivo csv que deve ser gerado, facilitando o flow.
+- Algumas vezes a largura é trocada em lugar do comprimento e vice versa, isso dificulta, devemos convencionar, para facilitar a compreensão do lado fitado que o comprimento sempre é o maior lado e a largura o menor. Assim fica mais fácil até definir o fitamento com um material apenas.
