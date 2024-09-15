@@ -75,10 +75,10 @@ class WoodenPiece:
         dimensions: list,
         material_names: list,
         name: str = None,
-        notes: str = None,
+        role: str = None,
     ):
         self.name = name
-        self.notes = notes
+        self.role = role
         self.thickness = min(dimensions)
         dimensions.remove(self.thickness)
         self.width = dimensions[0]
@@ -94,7 +94,7 @@ class WoodenPiece:
 
     def __str__(self):
         return f"""
-        Corte de MDF "{self.name}" - {self.notes} ({self.material})
+        Corte de MDF "{self.name}" - {self.role} ({self.material})
         Dimensões (mm) {self.width}mm x {self.height}mm Espessura {self.thickness}mm
         Fitas: {self.edge_tapes}
         """
@@ -127,7 +127,7 @@ for sel in selection:
                 int(sel.dimensions.z),
             ],
             material_names=[m.name for m in sel.material_slots],
-            notes=sel["notes"] if "notes" in sel else None,
+            role=sel["role"] if "role" in sel else None,
         )
         # Verifica se temos outra peça com o mesmo nome e *.001 para adicionar na quantidade
         for s in selection:
@@ -139,7 +139,7 @@ for sel in selection:
         height = min(wooden_piece.width, wooden_piece.height)
         # Adiciona a linha ao csv
         file.write(
-            f"{quantity};{width};{height};{wooden_piece.name};{wooden_piece.edge_tapes.c1 or ''};{wooden_piece.edge_tapes.c2 or ''};{wooden_piece.edge_tapes.l1 or ''};{wooden_piece.edge_tapes.l2 or ''};{wooden_piece.material};{wooden_piece.notes or ''}\n"
+            f"{quantity};{width};{height};{wooden_piece.role or ''};{wooden_piece.edge_tapes.c1 or ''};{wooden_piece.edge_tapes.c2 or ''};{wooden_piece.edge_tapes.l1 or ''};{wooden_piece.edge_tapes.l2 or ''};{wooden_piece.material};{wooden_piece.name}\n"
         )
 
 file.close()

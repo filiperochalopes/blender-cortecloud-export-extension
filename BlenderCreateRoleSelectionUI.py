@@ -9,11 +9,12 @@ func_options = [
     ('LATERAL_ESQUERDA', 'Lateral Esquerda', ''),
     ('TAMPO', 'Tampo', ''),
     ('BASE', 'Base', ''),
+    ('NONE', '', ''),
 ]
 
 # Função chamada quando a propriedade é alterada
 def update_role_property(self, context):
-    self["role"] = self.funcao_enum  # Adiciona a função selecionada à propriedade 'role' do objeto
+    self["role"] = next((item[1] for item in func_options if item[0] == self.funcao_enum), "")  # Adiciona a função selecionada à propriedade 'role' do objeto
 
 # Adicionando a propriedade de enumeração aos objetos do tipo Object
 def add_custom_enum_property():
@@ -21,13 +22,13 @@ def add_custom_enum_property():
         name="Função", 
         description="Selecione a função da peça", 
         items=func_options,
-        default='BASE',  # Definindo 'BASE' como o valor padrão
+        default='NONE',  # Definindo 'BASE' como o valor padrão
         update=update_role_property  # Chama a função ao atualizar a enum
     )
 
 # Criando o painel para exibir a propriedade no painel lateral (tecla N)
 class VIEW3D_PT_custom_panel(bpy.types.Panel):
-    bl_label = "Função da Peça"
+    bl_label = "CorteCloud Export Utils"
     bl_idname = "VIEW3D_PT_custom_panel"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
