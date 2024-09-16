@@ -1,9 +1,9 @@
-schema_version = "1.0.1"
+schema_version = "1.0.0"
 
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
 id = "cortecloud_export"
-version = "1.0.0"
+version = "1.0.1"
 name = "CorteCloud Export"
 tagline = "Manage and Export wood cut list to CorteCloud csv format"
 maintainer = "Filipe Lopes <contato@filipelopes.me>"
@@ -66,4 +66,6 @@ paths_exclude_pattern = [
   "__pycache__/",
   "/.git/",
   "/*.zip",
+  "/*.jpeg",
+  "/*.png"
 ]
