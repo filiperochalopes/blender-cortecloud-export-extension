@@ -8,12 +8,7 @@ import bpy
 import os
 from bpy.props import StringProperty
 import utils.create_item_custom_panel
-
-# Function to configure the environment
-def configure_environment(context):
-    # Código de configuração do ambiente
-    # Exemplo: Ajustar camadas, preparar cena
-    print("Environment configuration completed")
+from utils.configure_environment import configure_environment
 
 # Function to create base materials
 def create_base_materials(context):
