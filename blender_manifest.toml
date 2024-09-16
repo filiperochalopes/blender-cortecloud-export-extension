@@ -1,11 +1,11 @@
-schema_version = "1.0.0"
+schema_version = "1.0.1"
 
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
-id = "cortecloud-export"
+id = "cortecloud_export"
 version = "1.0.0"
 name = "CorteCloud Export"
-tagline = "[PT-BR] Exportar csv de plano de corte para criação de móveis MDF compatível com CorteCloud"
+tagline = "Manage and Export wood cut list to CorteCloud csv format"
 maintainer = "Filipe Lopes <contato@filipelopes.me>"
 # Supported types: "add-on", "theme"
 type = "add-on"
