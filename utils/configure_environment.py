@@ -6,7 +6,7 @@ Configurações de ambiente para uma melhor edição e visualização dos móvei
 import bpy
 
 # Configurações de ambiente para melhor uso em móveis e precisão
-def set_view_settings():
+def configure_environment():
     unit_settings = bpy.context.scene.unit_settings
     unit_settings.system = 'METRIC'
     unit_settings.scale_length = 0.001
