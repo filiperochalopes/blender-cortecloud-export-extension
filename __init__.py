@@ -127,6 +127,35 @@ class VIEW3D_PT_custom_panel(bpy.types.Panel):
             # Mostra também o valor atual da propriedade 'role' (opcional)
             layout.label(text=f"Role: {obj.get('role', 'None')}")
 
+            # Adiciona dois botões para ajustar o tamanho Z
+            layout.operator("object.set_z_15", text="15mm")
+            layout.operator("object.set_z_18", text="18mm")
+
+# Define as funções dos botões
+class OBJECT_OT_set_z_15(bpy.types.Operator):
+    bl_idname = "object.set_z_15"
+    bl_label = "Set Z to 15mm"
+    
+    def execute(self, context):
+        obj = context.object
+        if obj is not None:
+            obj.transform_apply(location=False, rotation=False, scale=True)
+            obj.scale.z = 0.015  # Define a altura para 15mm (escala em metros)
+            obj.transform_apply(scale=True)
+        return {'FINISHED'}
+
+class OBJECT_OT_set_z_18(bpy.types.Operator):
+    bl_idname = "object.set_z_18"
+    bl_label = "Set Z to 18mm"
+    
+    def execute(self, context):
+        obj = context.object
+        if obj is not None:
+            obj.transform_apply(location=False, rotation=False, scale=True)
+            obj.scale.z = 0.018  # Define a altura para 18mm (escala em metros)
+            obj.transform_apply(scale=True)
+        return {'FINISHED'}
+    
 # Registro das classes do plugin
 def register():
     bpy.utils.register_class(OBJECT_OT_configure_environment)
@@ -135,6 +164,8 @@ def register():
     bpy.utils.register_class(OBJECT_OT_create_example_piece)
     bpy.utils.register_class(OBJECT_PT_cortecloud_panel)
     bpy.utils.register_class(VIEW3D_PT_custom_panel)
+    bpy.utils.register_class(OBJECT_OT_set_z_15)
+    bpy.utils.register_class(OBJECT_OT_set_z_18)
     add_custom_enum_property()
 
 def unregister():
@@ -144,6 +175,8 @@ def unregister():
     bpy.utils.unregister_class(OBJECT_OT_create_example_piece)
     bpy.utils.unregister_class(OBJECT_PT_cortecloud_panel)
     bpy.utils.unregister_class(VIEW3D_PT_custom_panel)
+    bpy.utils.unregister_class(OBJECT_OT_set_z_15)
+    bpy.utils.unregister_class(OBJECT_OT_set_z_18)
     del bpy.types.Object.funcao_enum
 
 if __name__ == "__main__":

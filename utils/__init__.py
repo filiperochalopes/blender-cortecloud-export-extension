@@ -7,9 +7,21 @@ def configure_environment(context):
     unit_settings.scale_length = 0.001
     unit_settings.length_unit = 'MILLIMETERS'
     unit_settings.system_rotation = 'DEGREES'
+    # Ativando função de snap para vértice
+    tool_settings = bpy.context.scene.tool_settings
+    tool_settings.use_snap = True
+    tool_settings.snap_elements_base = {'VERTEX'}
+    # Dividindo área de trabalho
+    bpy.ops.screen.area_split(direction='VERTICAL', factor=0.3)
+
+    all_areas = [a for a in bpy.context.screen.areas]
+    all_areas[-1].type = 'OUTLINER'
+
     # Cada cena é composta de várias áreas/janelas
     areas = [a for a in bpy.context.screen.areas if a.type == 'VIEW_3D']
     # spaces = [s for s in areas if s.type == 'VIEW_3D']
+
+    # Configurando área de seleção de objetos
     # workspace = None
     for area in areas:
         for s in area.spaces:
