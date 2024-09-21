@@ -70,6 +70,8 @@ def create_default_materials(context):
 def export_to_csv(filepath):
     # Captura apenas a seleção, gosto de utilizar coleções de madeira e outras de outros materiais, dessa forma fica fácil selecionar apenas os itens de madeira
     selection = bpy.context.selected_objects
+    # Para cada objeto selecionado, aplica a transformação de escala e rotação
+    bpy.ops.object.transform_apply(location=False, rotation=True, scale=True)
 
     # Arquivo de saída (edite aqui)
     output_file = filepath

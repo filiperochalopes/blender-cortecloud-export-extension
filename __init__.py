@@ -139,9 +139,9 @@ class OBJECT_OT_set_z_15(bpy.types.Operator):
     def execute(self, context):
         obj = context.object
         if obj is not None:
-            obj.transform_apply(location=False, rotation=False, scale=True)
-            obj.scale.z = 0.015  # Define a altura para 15mm (escala em metros)
-            obj.transform_apply(scale=True)
+            bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+            obj.dimensions.z = 15  # Define a altura para 15mm (escala em metros)
+            bpy.ops.object.transform_apply(scale=True)
         return {'FINISHED'}
 
 class OBJECT_OT_set_z_18(bpy.types.Operator):
@@ -151,9 +151,9 @@ class OBJECT_OT_set_z_18(bpy.types.Operator):
     def execute(self, context):
         obj = context.object
         if obj is not None:
-            obj.transform_apply(location=False, rotation=False, scale=True)
-            obj.scale.z = 0.018  # Define a altura para 18mm (escala em metros)
-            obj.transform_apply(scale=True)
+            bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+            obj.dimensions.z = 18  # Define a altura para 18mm (escala em metros)
+            bpy.ops.object.transform_apply(scale=True)
         return {'FINISHED'}
     
 # Registro das classes do plugin
