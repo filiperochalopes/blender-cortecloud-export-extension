@@ -32,13 +32,18 @@ class OBJECT_OT_export_to_csv(bpy.types.Operator):
     bl_idname = "object.export_to_csv"
     bl_label = "Export to CSV"
     
-    filepath: StringProperty(subtype="FILE_PATH", default="cortecloud-export-list.csv")  # Nome padrão
+    filepath: StringProperty(subtype="FILE_PATH")
     
     def execute(self, context):
+        print(self.filepath)
         utils.export_to_csv(self.filepath)
         return {'FINISHED'}
     
     def invoke(self, context, event):
+        # Define o valor padrão do filepath no invoke, caso não esteja definido
+        if not self.filepath:
+            self.filepath = "cortecloud-cut-list.csv"
+        
         context.window_manager.fileselect_add(self)
         return {'RUNNING_MODAL'}
 
