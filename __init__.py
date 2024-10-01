@@ -9,16 +9,6 @@ import os
 from bpy.props import StringProperty
 from . import utils
 
-# Function to export CSV
-def export_to_csv(filepath):
-    # Utilizamos o código que você já tem para gerar o CSV
-    # Adaptando para salvar no caminho selecionado
-    print(f"Exporting to {filepath}")
-    # Aqui você chama a função que você já criou para exportar CSV
-    # Por exemplo: export_cut_list(filepath)
-
-
-
 # Operator to configure environment
 class OBJECT_OT_configure_environment(bpy.types.Operator):
     bl_idname = "object.configure_environment"
@@ -42,7 +32,7 @@ class OBJECT_OT_export_to_csv(bpy.types.Operator):
     bl_idname = "object.export_to_csv"
     bl_label = "Export to CSV"
     
-    filepath: StringProperty(subtype="FILE_PATH")
+    filepath: StringProperty(subtype="FILE_PATH", default="cortecloud-export-list.csv")  # Nome padrão
     
     def execute(self, context):
         utils.export_to_csv(self.filepath)

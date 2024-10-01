@@ -55,12 +55,12 @@ def create_default_materials(context):
             print(f"Material {name} já existe.")
 
     # Criando materiais iniciais para MDFs brancos
-    create_material('MDF Branco', (0.905, 0.905, 0.905, 1))  # #E7E7E7
-    create_material('L1 Branco', (0, 0.905, 0.890, 1))       # #00E7E3
-    create_material('L2 Branco', (0, 0.905, 0.890, 1))       # #00E7E3
-    create_material('C1 Branco', (0, 0.905, 0.890, 1))       # #00E7E3
-    create_material('C2 Branco', (0, 0.905, 0.890, 1))       # #00E7E3
-    create_material('Sem Fita', (0.866, 0, 0.905, 1))        # #DD00E7
+    create_material('MDF White - Branco', (0.905, 0.905, 0.905, 1))  # #E7E7E7
+    create_material('L1 White - Branco', (0, 0.905, 0.890, 1))       # #00E7E3
+    create_material('L2 White - Branco', (0, 0.905, 0.890, 1))       # #00E7E3
+    create_material('C1 White - Branco', (0, 0.905, 0.890, 1))       # #00E7E3
+    create_material('C2 White - Branco', (0, 0.905, 0.890, 1))       # #00E7E3
+    create_material('No Edge Ribbons - Sem Fita', (0.866, 0, 0.905, 1))        # #DD00E7
 
     # Atualizando para correção de medidas em script em relação ao viewport
     bpy.context.view_layer.update()
@@ -68,6 +68,10 @@ def create_default_materials(context):
 
 
 def export_to_csv(filepath):
+    # Adiciona ".csv" ao nome do arquivo se o usuário não adicionar
+    if not filepath.endswith(".csv"):
+        filepath += ".csv"
+
     # Captura apenas a seleção, gosto de utilizar coleções de madeira e outras de outros materiais, dessa forma fica fácil selecionar apenas os itens de madeira
     selection = bpy.context.selected_objects
     # Para cada objeto selecionado, aplica a transformação de escala e rotação
