@@ -74,6 +74,7 @@ def export_to_csv(filepath):
 
     # Captura apenas a seleção, gosto de utilizar coleções de madeira e outras de outros materiais, dessa forma fica fácil selecionar apenas os itens de madeira
     selection = bpy.context.selected_objects
+    scene_scale = bpy.context.scene.unit_settings.scale_length or 1
     # Para cada objeto selecionado, aplica a transformação de escala e rotação
     bpy.ops.object.transform_apply(location=False, rotation=True, scale=True)
 
@@ -163,9 +164,9 @@ def export_to_csv(filepath):
             wooden_piece = WoodenPiece(
                 name=sel.name,
                 dimensions=[
-                    int(sel.dimensions.x),
-                    int(sel.dimensions.y),
-                    int(sel.dimensions.z),
+                    round(sel.dimensions.x / scene_scale),
+                    round(sel.dimensions.y / scene_scale),
+                    round(sel.dimensions.z / scene_scale),
                 ],
                 material_names=[m.name for m in sel.material_slots],
                 role=sel["role"] if "role" in sel else None,
