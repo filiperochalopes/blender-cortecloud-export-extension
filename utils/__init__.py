@@ -1,4 +1,12 @@
-import bpy, os, re
+import bpy, bmesh, json, os, re  # noqa: E401
+
+ADDON_ROOT = os.path.dirname(os.path.dirname(__file__))
+DRAWER_PARTS_FILE = os.path.join(ADDON_ROOT, "assets", "drawer_parts.json")
+
+
+def load_drawer_parts():
+    with open(DRAWER_PARTS_FILE, "r", encoding="utf-8") as file:
+        return json.load(file)
 
 # Configurações de ambiente para melhor uso em móveis e precisão
 def configure_environment(context):
@@ -87,8 +95,8 @@ def export_to_csv(filepath):
     class EdgeTapes:
         def __init__(self, material_names):
             def get_tape_material(tape_identifier: str):
-                l = [m for m in material_names if tape_identifier in m]
-                return l[0].replace(tape_identifier, "").strip() if len(l) > 0 else None
+                matching_materials = [m for m in material_names if tape_identifier in m]
+                return matching_materials[0].replace(tape_identifier, "").strip() if len(matching_materials) > 0 else None
 
             # Verifica se existem algum material com as palavras chaves
             self.c1 = get_tape_material("C1")
@@ -185,20 +193,164 @@ def export_to_csv(filepath):
 
     file.close()
 
-def create_example_piece(context):
-    # Função que cria um nicho com gaveta suspensa
+def get_scene_scale_length():
+    unit_settings = bpy.context.scene.unit_settings
+    return unit_settings.scale_length if unit_settings.scale_length else 1.0
+
+
+def mm_to_scene_units(mm):
+    return mm / (1000.0 * get_scene_scale_length())
+
+
+def vec_mm_to_scene(coords):
+    return (
+        mm_to_scene_units(coords["x"]),
+        mm_to_scene_units(coords["y"]),
+        mm_to_scene_units(coords["z"]),
+    )
+
+
+def ensure_material(name):
+    material = bpy.data.materials.get(name)
+    if material is None:
+        material = bpy.data.materials.new(name=name)
+    return material
+
+
+def ensure_collection(name):
+    collection = bpy.data.collections.get(name)
+    if collection is None:
+        collection = bpy.data.collections.new(name)
+        bpy.context.scene.collection.children.link(collection)
+    return collection
+
+
+def get_face_signature_from_polygon(polygon):
+    normal = polygon.normal.normalized()
+
+    axis_values = {
+        "x": abs(normal.x),
+        "y": abs(normal.y),
+        "z": abs(normal.z),
+    }
+    dominant_axis = max(axis_values, key=axis_values.get)
+
+    if dominant_axis == "x":
+        sign = "+" if normal.x >= 0 else "-"
+    elif dominant_axis == "y":
+        sign = "+" if normal.y >= 0 else "-"
+    else:
+        sign = "+" if normal.z >= 0 else "-"
+
+    return f"{dominant_axis}{sign}"
+
+
+def build_material_slot_map(obj, material_names):
+    obj.data.materials.clear()
+    material_slot_map = {}
+
+    for material_name in material_names:
+        obj.data.materials.append(ensure_material(material_name))
+        material_slot_map[material_name] = len(obj.data.materials) - 1
+
+    return material_slot_map
+
+
+def assign_drawer_materials(obj, drawer_piece):
+    material_slot_map = build_material_slot_map(obj, drawer_piece["materials"])
+
+    for polygon in obj.data.polygons:
+        face_signature = get_face_signature_from_polygon(polygon)
+        material_name = drawer_piece["face_materials"].get(face_signature)
+        if material_name is None:
+            continue
+        polygon.material_index = material_slot_map[material_name]
+
+    obj.data.update()
+
+
+def create_box_mesh_object(name, dimensions_mm, location_scene, collection):
+    mesh = bpy.data.meshes.new(name)
+    obj = bpy.data.objects.new(name, mesh)
+    collection.objects.link(obj)
+
+    bm = bmesh.new()
+    bmesh.ops.create_cube(bm, size=2.0)
+    bm.to_mesh(mesh)
+    bm.free()
+
+    obj.location = location_scene
+    obj.rotation_euler = (0.0, 0.0, 0.0)
+    obj.scale = (
+        mm_to_scene_units(dimensions_mm["x"]) / 2.0,
+        mm_to_scene_units(dimensions_mm["y"]) / 2.0,
+        mm_to_scene_units(dimensions_mm["z"]) / 2.0,
+    )
+
+    bpy.context.view_layer.objects.active = obj
+    obj.select_set(True)
+    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+    obj.select_set(False)
+
+    return obj
+
+
+def compute_group_center_scene(drawer_parts):
+    mins = [float("inf"), float("inf"), float("inf")]
+    maxs = [float("-inf"), float("-inf"), float("-inf")]
+
+    for drawer_piece in drawer_parts:
+        location_scene = vec_mm_to_scene(drawer_piece["location_mm"])
+        dimensions_scene = (
+            mm_to_scene_units(drawer_piece["dimensions_mm"]["x"]),
+            mm_to_scene_units(drawer_piece["dimensions_mm"]["y"]),
+            mm_to_scene_units(drawer_piece["dimensions_mm"]["z"]),
+        )
+        half_dimensions = [value / 2.0 for value in dimensions_scene]
+
+        for index in range(3):
+            mins[index] = min(mins[index], location_scene[index] - half_dimensions[index])
+            maxs[index] = max(maxs[index], location_scene[index] + half_dimensions[index])
+
+    return tuple((mins[index] + maxs[index]) / 2.0 for index in range(3))
+
+
+def create_drawer(context):
+    drawer_parts = load_drawer_parts()
+    collection = ensure_collection("Drawer")
+    cursor_location = context.scene.cursor.location.copy()
+    group_center = compute_group_center_scene(drawer_parts)
+    translation = (
+        cursor_location.x - group_center[0],
+        cursor_location.y - group_center[1],
+        cursor_location.z - group_center[2],
+    )
+
+    created_objects = []
+
     bpy.ops.object.select_all(action='DESELECT')
-    
-    # Creating the niche (a box)
-    bpy.ops.mesh.primitive_cube_add(size=2, location=(0, 0, 1))
-    niche = bpy.context.active_object
-    niche.scale = (1, 0.5, 1)
-    niche.name = "Niche"
-    
-    # Creating the suspended drawer (a smaller cube)
-    bpy.ops.mesh.primitive_cube_add(size=1, location=(0, 0, 0.5))
-    drawer = bpy.context.active_object
-    drawer.scale = (0.8, 0.4, 0.2)
-    drawer.name = "Suspended Drawer"
-    
-    print("Example piece created: Niche with suspended drawer")
+
+    for drawer_piece in drawer_parts:
+        original_location = vec_mm_to_scene(drawer_piece["location_mm"])
+        location_scene = (
+            original_location[0] + translation[0],
+            original_location[1] + translation[1],
+            original_location[2] + translation[2],
+        )
+
+        obj = create_box_mesh_object(
+            name=drawer_piece["name"],
+            dimensions_mm=drawer_piece["dimensions_mm"],
+            location_scene=location_scene,
+            collection=collection,
+        )
+        assign_drawer_materials(obj, drawer_piece)
+        created_objects.append(obj)
+
+    for obj in created_objects:
+        obj.select_set(True)
+
+    if created_objects:
+        bpy.context.view_layer.objects.active = created_objects[0]
+
+    print(f"Gaveta criada com {len(created_objects)} peças.")

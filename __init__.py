@@ -1,3 +1,5 @@
+# ruff: noqa: E402
+
 bl_info = {
     "name": "CorteCloud Export Utils",
     "blender": (3, 0, 0),
@@ -5,7 +7,6 @@ bl_info = {
 }
 
 import bpy
-import os
 from bpy.props import StringProperty
 from . import utils
 
@@ -47,13 +48,13 @@ class OBJECT_OT_export_to_csv(bpy.types.Operator):
         context.window_manager.fileselect_add(self)
         return {'RUNNING_MODAL'}
 
-# Operator to create example piece
-class OBJECT_OT_create_example_piece(bpy.types.Operator):
-    bl_idname = "object.create_example_piece"
-    bl_label = "Create Example Piece (WIP)"
+# Operator para criar gaveta
+class OBJECT_OT_create_drawer(bpy.types.Operator):
+    bl_idname = "object.create_drawer"
+    bl_label = "Criar gaveta"
     
     def execute(self, context):
-        utils.create_example_piece(context)
+        utils.create_drawer(context)
         return {'FINISHED'}
 
 # Panel in the N region to hold the buttons
@@ -76,8 +77,8 @@ class OBJECT_PT_cortecloud_panel(bpy.types.Panel):
         # Botão para exportar CSV
         layout.operator("object.export_to_csv", text="Export to CSV")
         
-        # Botão para criar exemplo de peça
-        layout.operator("object.create_example_piece", text="Create Example Piece")
+        # Botão para criar gaveta
+        layout.operator("object.create_drawer", text="Criar gaveta")
 
 func_options = [
     ('CONTRA_FRENTE_FUNDO_GAVETA', 'Contra Frente / Contra Fundo de Gaveta', ''),
@@ -156,7 +157,7 @@ def register():
     bpy.utils.register_class(OBJECT_OT_configure_environment)
     bpy.utils.register_class(OBJECT_OT_create_base_materials)
     bpy.utils.register_class(OBJECT_OT_export_to_csv)
-    bpy.utils.register_class(OBJECT_OT_create_example_piece)
+    bpy.utils.register_class(OBJECT_OT_create_drawer)
     bpy.utils.register_class(OBJECT_PT_cortecloud_panel)
     bpy.utils.register_class(VIEW3D_PT_custom_panel)
     bpy.utils.register_class(OBJECT_OT_set_z_15)
@@ -167,7 +168,7 @@ def unregister():
     bpy.utils.unregister_class(OBJECT_OT_configure_environment)
     bpy.utils.unregister_class(OBJECT_OT_create_base_materials)
     bpy.utils.unregister_class(OBJECT_OT_export_to_csv)
-    bpy.utils.unregister_class(OBJECT_OT_create_example_piece)
+    bpy.utils.unregister_class(OBJECT_OT_create_drawer)
     bpy.utils.unregister_class(OBJECT_PT_cortecloud_panel)
     bpy.utils.unregister_class(VIEW3D_PT_custom_panel)
     bpy.utils.unregister_class(OBJECT_OT_set_z_15)

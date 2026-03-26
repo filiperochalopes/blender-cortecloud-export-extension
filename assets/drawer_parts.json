@@ -1,0 +1,118 @@
+[
+    {
+        "name": "Drawer - Bottom",
+        "dimensions_mm": {"x": 774.001, "y": 420.001, "z": 6.0},
+        "location_mm": {"x": 2292.004, "y": -1773.105, "z": 743.914},
+        "materials": [
+            "MDF Branco",
+            "C1 White - Branco",
+            "Sem Fita",
+            "L1 White - Branco",
+            "L2 White - Branco"
+        ],
+        "face_materials": {
+            "z-": "MDF Branco",
+            "x+": "L2 White - Branco",
+            "z+": "MDF Branco",
+            "x-": "L1 White - Branco",
+            "y-": "C1 White - Branco",
+            "y+": "Sem Fita"
+        }
+    },
+    {
+        "name": "Drawer - Back",
+        "dimensions_mm": {"x": 744.001, "y": 15.0, "z": 187.016},
+        "location_mm": {"x": 2292.004, "y": -1975.606, "z": 840.422},
+        "materials": [
+            "MDF Branco",
+            "C1 White - Branco",
+            "Sem Fita"
+        ],
+        "face_materials": {
+            "y+": "MDF Branco",
+            "x+": "Sem Fita",
+            "y-": "MDF Branco",
+            "x-": "Sem Fita",
+            "z-": "Sem Fita",
+            "z+": "C1 White - Branco"
+        }
+    },
+    {
+        "name": "Drawer - Front",
+        "dimensions_mm": {"x": 826.001, "y": 15.0, "z": 222.017},
+        "location_mm": {"x": 2292.004, "y": -1555.605, "z": 832.922},
+        "materials": [
+            "MDF Branco",
+            "C1 White - Branco",
+            "C2 White - Branco",
+            "L1 White - Branco",
+            "L2 White - Branco"
+        ],
+        "face_materials": {
+            "y+": "MDF Branco",
+            "x+": "L2 White - Branco",
+            "y-": "MDF Branco",
+            "x-": "L1 White - Branco",
+            "z-": "C1 White - Branco",
+            "z+": "C2 White - Branco"
+        }
+    },
+    {
+        "name": "Drawer - Side",
+        "dimensions_mm": {"x": 15.0, "y": 420.001, "z": 187.016},
+        "location_mm": {"x": 2671.505, "y": -1773.105, "z": 840.422},
+        "materials": [
+            "MDF Branco",
+            "C1 White - Branco",
+            "Sem Fita",
+            "L1 White - Branco",
+            "L2 White - Branco"
+        ],
+        "face_materials": {
+            "x+": "MDF Branco",
+            "z+": "L2 White - Branco",
+            "x-": "MDF Branco",
+            "z-": "L1 White - Branco",
+            "y-": "C1 White - Branco",
+            "y+": "Sem Fita"
+        }
+    },
+    {
+        "name": "Drawer - Side",
+        "dimensions_mm": {"x": 15.0, "y": 420.001, "z": 187.016},
+        "location_mm": {"x": 1912.504, "y": -1773.105, "z": 840.422},
+        "materials": [
+            "MDF Branco",
+            "C1 White - Branco",
+            "Sem Fita",
+            "L1 White - Branco",
+            "L2 White - Branco"
+        ],
+        "face_materials": {
+            "x+": "MDF Branco",
+            "z+": "L2 White - Branco",
+            "x-": "MDF Branco",
+            "z-": "L1 White - Branco",
+            "y-": "C1 White - Branco",
+            "y+": "Sem Fita"
+        }
+    },
+    {
+        "name": "Drawer - Inner Front",
+        "dimensions_mm": {"x": 744.001, "y": 15.0, "z": 187.016},
+        "location_mm": {"x": 2292.004, "y": -1570.605, "z": 840.422},
+        "materials": [
+            "MDF Branco",
+            "C1 White - Branco",
+            "Sem Fita"
+        ],
+        "face_materials": {
+            "y+": "MDF Branco",
+            "x+": "Sem Fita",
+            "y-": "MDF Branco",
+            "x-": "Sem Fita",
+            "z-": "Sem Fita",
+            "z+": "C1 White - Branco"
+        }
+    }
+]
