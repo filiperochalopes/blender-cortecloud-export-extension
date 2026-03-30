@@ -8,48 +8,120 @@ def load_drawer_parts():
     with open(DRAWER_PARTS_FILE, "r", encoding="utf-8") as file:
         return json.load(file)
 
+
+def _ranges_overlap(start_a, size_a, start_b, size_b):
+    end_a = start_a + size_a
+    end_b = start_b + size_b
+    return min(end_a, end_b) > max(start_a, start_b)
+
+
+def _get_area_center(area):
+    return (
+        area.x + int(area.width / 2),
+        area.y + int(area.height / 2),
+    )
+
+
+def _find_area_to_join(screen, source_area):
+    best_area = None
+    best_score = -1
+
+    for area in screen.areas:
+        if area == source_area:
+            continue
+
+        shares_vertical_border = (
+            (source_area.x + source_area.width == area.x or area.x + area.width == source_area.x)
+            and _ranges_overlap(source_area.y, source_area.height, area.y, area.height)
+        )
+        shares_horizontal_border = (
+            (source_area.y + source_area.height == area.y or area.y + area.height == source_area.y)
+            and _ranges_overlap(source_area.x, source_area.width, area.x, area.width)
+        )
+
+        if not shares_vertical_border and not shares_horizontal_border:
+            continue
+
+        score = 2 if area.type == 'VIEW_3D' else 1
+        if score > best_score:
+            best_area = area
+            best_score = score
+
+    return best_area
+
+
+def close_outliner_areas(context):
+    screen = context.screen
+    window = context.window
+    outliner_areas = [area for area in screen.areas if area.type == 'OUTLINER']
+
+    for area in outliner_areas:
+        if len(screen.areas) <= 1:
+            break
+
+        region = next((region for region in area.regions if region.type == 'WINDOW'), None)
+
+        try:
+            override_args = {"window": window, "screen": screen, "area": area}
+            if region:
+                override_args["region"] = region
+
+            with context.temp_override(**override_args):
+                result = bpy.ops.screen.area_close()
+
+            if 'FINISHED' in result:
+                continue
+        except RuntimeError:
+            pass
+
+        target_area = _find_area_to_join(screen, area)
+        if not target_area:
+            continue
+
+        with context.temp_override(window=window, screen=screen, area=area):
+            bpy.ops.screen.area_join(
+                source_xy=_get_area_center(area),
+                target_xy=_get_area_center(target_area),
+            )
+
 # Configurações de ambiente para melhor uso em móveis e precisão
 def configure_environment(context):
-    unit_settings = bpy.context.scene.unit_settings
+    unit_settings = context.scene.unit_settings
     unit_settings.system = 'METRIC'
     unit_settings.scale_length = 0.001
     unit_settings.length_unit = 'MILLIMETERS'
     unit_settings.system_rotation = 'DEGREES'
     # Ativando função de snap para vértice
-    tool_settings = bpy.context.scene.tool_settings
+    tool_settings = context.scene.tool_settings
     tool_settings.use_snap = True
     tool_settings.snap_elements_base = {'VERTEX'}
-    # Dividindo área de trabalho
-    bpy.ops.screen.area_split(direction='VERTICAL', factor=0.3)
-
-    all_areas = [a for a in bpy.context.screen.areas]
-    all_areas[-1].type = 'OUTLINER'
+    # Fechando Outliners já abertos no layout
+    close_outliner_areas(context)
 
     # Cada cena é composta de várias áreas/janelas
-    areas = [a for a in bpy.context.screen.areas if a.type == 'VIEW_3D']
-    # spaces = [s for s in areas if s.type == 'VIEW_3D']
+    areas = [a for a in context.screen.areas if a.type == 'VIEW_3D']
 
     # Configurando área de seleção de objetos
-    # workspace = None
     for area in areas:
         for s in area.spaces:
             if s.type == 'VIEW_3D':
                 s.shading.type = 'SOLID'
                 s.shading.show_xray = True
                 s.overlay.grid_scale = 0.001
+                s.clip_start = 0.1
                 s.clip_end = 1000000
 
     # Alterando o clipping point da camera ativa, caso exista uma
-    if bpy.context.scene.camera:
-        bpy.context.scene.camera.data.clip_end = 1000000
+    if context.scene.camera:
+        context.scene.camera.data.clip_end = 1000000
 
     # Removendo todas as luzes e câmeras do ambiente
-    for obj in bpy.context.scene.objects:
+    for obj in context.scene.objects:
         if obj.type == 'LIGHT' or obj.type == 'CAMERA':
             bpy.data.objects.remove(obj, do_unlink=True)
             
     # Atualizando para correção de medidas em script em relação ao viewport
-    bpy.context.view_layer.update()
+    context.view_layer.update()
 
 
 def create_default_materials(context):
