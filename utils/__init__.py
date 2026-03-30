@@ -370,8 +370,24 @@ def get_largest_view_3d_area(screen):
     return max(view_3d_areas, key=lambda area: area.width * area.height)
 
 
-def configure_outliner_area(area):
-    area.type = 'OUTLINER'
+def configure_outliner_area(context, window, screen, area):
+    region = get_area_window_region(area)
+    override_args = {"window": window, "screen": screen, "area": area}
+    if region is not None:
+        override_args["region"] = region
+
+    try:
+        with context.temp_override(**override_args):
+            bpy.ops.wm.context_set_enum(data_path="area.type", value='OUTLINER')
+    except RuntimeError:
+        area.type = 'OUTLINER'
+    else:
+        area.type = 'OUTLINER'
+
+    try:
+        area.ui_type = 'OUTLINER'
+    except TypeError:
+        pass
 
     for space in area.spaces:
         if space.type == 'OUTLINER':
@@ -380,11 +396,7 @@ def configure_outliner_area(area):
 
 
 def ensure_outliner_area(context, window, screen):
-    outliner_areas = [area for area in screen.areas if area.type == 'OUTLINER']
-    if outliner_areas:
-        outliner_area = min(outliner_areas, key=lambda area: area.x)
-        configure_outliner_area(outliner_area)
-        return outliner_area
+    close_outliner_areas(context)
 
     source_area = get_largest_view_3d_area(screen)
     if source_area is None:
@@ -395,13 +407,6 @@ def ensure_outliner_area(context, window, screen):
     if region is not None:
         override_args["region"] = region
 
-    original_bounds = {
-        "x": source_area.x,
-        "y": source_area.y,
-        "width": source_area.width,
-        "height": source_area.height,
-    }
-
     try:
         with context.temp_override(**override_args):
             result = bpy.ops.screen.area_split(direction='VERTICAL', factor=0.2)
@@ -411,26 +416,26 @@ def ensure_outliner_area(context, window, screen):
     if 'FINISHED' not in result:
         return None
 
-    split_areas = [
-        area for area in screen.areas
-        if area.y == original_bounds["y"]
-        and area.height == original_bounds["height"]
-        and _ranges_overlap(area.x, area.width, original_bounds["x"], original_bounds["width"])
-    ]
-    if len(split_areas) < 2:
+    all_areas = [area for area in screen.areas]
+    if not all_areas:
         return None
 
-    outliner_area = min(split_areas, key=lambda area: area.x)
-    configure_outliner_area(outliner_area)
+    outliner_area = all_areas[-1]
+    configure_outliner_area(context, window, screen, outliner_area)
     return outliner_area
 
 
-def close_outliner_areas(context):
+def close_outliner_areas(context, keep_areas=None):
     window, screen = get_window_and_screen(context)
     if window is None or screen is None:
         return
 
-    outliner_areas = [area for area in screen.areas if area.type == 'OUTLINER']
+    keep_area_pointers = {area.as_pointer() for area in (keep_areas or [])}
+    outliner_areas = [
+        area for area in screen.areas
+        if area.type == 'OUTLINER' and area.as_pointer() not in keep_area_pointers
+    ]
+    outliner_areas.sort(key=lambda area: area.x, reverse=True)
 
     for area in outliner_areas:
         if len(screen.areas) <= 1:

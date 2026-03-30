@@ -81,6 +81,7 @@ class OBJECT_PT_cortecloud_panel(bpy.types.Panel):
         layout.operator("object.create_drawer", text="Create Drawer")
 
 func_options = [
+    ('NONE', '', ''),
     ('CONTRA_FRENTE_FUNDO_GAVETA', 'Contra Frente / Contra Fundo de Gaveta', ''),
     ('LATERAL_GAVETA', 'Lateral de Gaveta', ''),
     ('PORTA', 'Porta', ''),
@@ -92,6 +93,10 @@ func_options = [
 
 # Função chamada quando a propriedade é alterada
 def update_role_property(self, context):
+    if self.funcao_enum == 'NONE':
+        self["role"] = ""
+        return
+
     self["role"] = next((item[1] for item in func_options if item[0] == self.funcao_enum), "")  # Adiciona a função selecionada à propriedade 'role' do objeto
 
 # Adicionando a propriedade de enumeração aos objetos do tipo Object
@@ -100,7 +105,7 @@ def add_custom_enum_property():
         name="Role",
         description="Selecione a função da peça",
         items=func_options,
-        default='BASE',
+        default='NONE',
         update=update_role_property  # Chama a função ao atualizar a enum
     )
 
