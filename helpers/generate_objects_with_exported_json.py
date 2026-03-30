@@ -43,17 +43,17 @@ DATA_JSON = r'''
         "z": 1.0
       },
       "materials": [
-        "MDF Branco",
-        "C1 White - Branco",
-        "Sem Fita",
-        "L1 White - Branco",
-        "L2 White - Branco"
+        "White MDF",
+        "Edge Banding (Com fita)",
+        "No Edge Banding",
+        "Edge Banding (Com fita)",
+        "Edge Banding (Com fita)"
       ],
       "material_assignments": {
         "slots": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -63,7 +63,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               4
@@ -72,7 +72,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -81,7 +81,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               3
@@ -90,7 +90,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               1
@@ -101,7 +101,7 @@ DATA_JSON = r'''
         "face_usage": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -111,7 +111,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               4
@@ -120,7 +120,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -129,7 +129,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               3
@@ -138,7 +138,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               1
@@ -151,7 +151,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 0,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 325080.5,
@@ -224,7 +224,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 1,
             "material_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 2519.929,
@@ -297,7 +297,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 2,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 325080.5,
@@ -370,7 +370,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 3,
             "material_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 2519.929,
@@ -443,7 +443,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 4,
             "material_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 4643.873,
@@ -516,7 +516,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 5,
             "material_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 4643.873,
@@ -622,15 +622,15 @@ DATA_JSON = r'''
         "z": 1.0
       },
       "materials": [
-        "MDF Branco",
-        "C1 White - Branco",
-        "Sem Fita"
+        "White MDF",
+        "Edge Banding (Com fita)",
+        "No Edge Banding"
       ],
       "material_assignments": {
         "slots": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -640,7 +640,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -649,7 +649,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "face_count": 3,
             "polygon_indices": [
               1,
@@ -662,7 +662,7 @@ DATA_JSON = r'''
         "face_usage": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -672,7 +672,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -681,7 +681,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "face_count": 3,
             "polygon_indices": [
               1,
@@ -696,7 +696,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 0,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 139140.138,
@@ -769,7 +769,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 1,
             "material_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 2805.183,
@@ -842,7 +842,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 2,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 139140.138,
@@ -915,7 +915,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 3,
             "material_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 2805.182,
@@ -988,7 +988,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 4,
             "material_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 11159.782,
@@ -1061,7 +1061,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 5,
             "material_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 11159.784,
@@ -1167,17 +1167,17 @@ DATA_JSON = r'''
         "z": 1.0
       },
       "materials": [
-        "MDF Branco",
-        "C1 White - Branco",
-        "C2 White - Branco",
-        "L1 White - Branco",
-        "L2 White - Branco"
+        "White MDF",
+        "Edge Banding (Com fita)",
+        "Edge Banding (Com fita)",
+        "Edge Banding (Com fita)",
+        "Edge Banding (Com fita)"
       ],
       "material_assignments": {
         "slots": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -1187,7 +1187,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               4
@@ -1196,7 +1196,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "C2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -1205,7 +1205,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               3
@@ -1214,7 +1214,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               1
@@ -1225,7 +1225,7 @@ DATA_JSON = r'''
         "face_usage": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -1235,7 +1235,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               4
@@ -1244,7 +1244,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "C2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -1253,7 +1253,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               3
@@ -1262,7 +1262,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               1
@@ -1275,7 +1275,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 0,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 183385.486,
@@ -1348,7 +1348,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 1,
             "material_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 3330.174,
@@ -1421,7 +1421,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 2,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 183385.486,
@@ -1494,7 +1494,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 3,
             "material_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 3330.174,
@@ -1567,7 +1567,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 4,
             "material_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 12389.747,
@@ -1640,7 +1640,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 5,
             "material_index": 2,
-            "material": "C2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 12389.749,
@@ -1746,17 +1746,17 @@ DATA_JSON = r'''
         "z": 1.0
       },
       "materials": [
-        "MDF Branco",
-        "C1 White - Branco",
-        "Sem Fita",
-        "L1 White - Branco",
-        "L2 White - Branco"
+        "White MDF",
+        "Edge Banding (Com fita)",
+        "No Edge Banding",
+        "Edge Banding (Com fita)",
+        "Edge Banding (Com fita)"
       ],
       "material_assignments": {
         "slots": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -1766,7 +1766,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               4
@@ -1775,7 +1775,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -1784,7 +1784,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               3
@@ -1793,7 +1793,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               1
@@ -1804,7 +1804,7 @@ DATA_JSON = r'''
         "face_usage": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -1814,7 +1814,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               4
@@ -1823,7 +1823,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -1832,7 +1832,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               3
@@ -1841,7 +1841,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               1
@@ -1854,7 +1854,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 0,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 78546.742,
@@ -1927,7 +1927,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 1,
             "material_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 6299.871,
@@ -2000,7 +2000,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 2,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 78546.742,
@@ -2073,7 +2073,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 3,
             "material_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 6299.871,
@@ -2146,7 +2146,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 4,
             "material_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 2805.182,
@@ -2219,7 +2219,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 5,
             "material_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 2805.182,
@@ -2325,17 +2325,17 @@ DATA_JSON = r'''
         "z": 1.0
       },
       "materials": [
-        "MDF Branco",
-        "C1 White - Branco",
-        "Sem Fita",
-        "L1 White - Branco",
-        "L2 White - Branco"
+        "White MDF",
+        "Edge Banding (Com fita)",
+        "No Edge Banding",
+        "Edge Banding (Com fita)",
+        "Edge Banding (Com fita)"
       ],
       "material_assignments": {
         "slots": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -2345,7 +2345,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               4
@@ -2354,7 +2354,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -2363,7 +2363,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               3
@@ -2372,7 +2372,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               1
@@ -2383,7 +2383,7 @@ DATA_JSON = r'''
         "face_usage": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -2393,7 +2393,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               4
@@ -2402,7 +2402,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -2411,7 +2411,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               3
@@ -2420,7 +2420,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               1
@@ -2433,7 +2433,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 0,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 78546.742,
@@ -2506,7 +2506,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 1,
             "material_index": 4,
-            "material": "L2 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 6299.871,
@@ -2579,7 +2579,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 2,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 78546.742,
@@ -2652,7 +2652,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 3,
             "material_index": 3,
-            "material": "L1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 6299.871,
@@ -2725,7 +2725,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 4,
             "material_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 2805.182,
@@ -2798,7 +2798,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 5,
             "material_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 2805.182,
@@ -2904,15 +2904,15 @@ DATA_JSON = r'''
         "z": 1.0
       },
       "materials": [
-        "MDF Branco",
-        "C1 White - Branco",
-        "Sem Fita"
+        "White MDF",
+        "Edge Banding (Com fita)",
+        "No Edge Banding"
       ],
       "material_assignments": {
         "slots": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -2922,7 +2922,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -2931,7 +2931,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "face_count": 3,
             "polygon_indices": [
               1,
@@ -2944,7 +2944,7 @@ DATA_JSON = r'''
         "face_usage": [
           {
             "slot_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "face_count": 2,
             "polygon_indices": [
               0,
@@ -2954,7 +2954,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "face_count": 1,
             "polygon_indices": [
               5
@@ -2963,7 +2963,7 @@ DATA_JSON = r'''
           },
           {
             "slot_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "face_count": 3,
             "polygon_indices": [
               1,
@@ -2978,7 +2978,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 0,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 139140.138,
@@ -3051,7 +3051,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 1,
             "material_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 2805.183,
@@ -3124,7 +3124,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 2,
             "material_index": 0,
-            "material": "MDF Branco",
+            "material": "White MDF",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 139140.138,
@@ -3197,7 +3197,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 3,
             "material_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 2805.182,
@@ -3270,7 +3270,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 4,
             "material_index": 2,
-            "material": "Sem Fita",
+            "material": "No Edge Banding",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 11159.782,
@@ -3343,7 +3343,7 @@ DATA_JSON = r'''
           {
             "polygon_index": 5,
             "material_index": 1,
-            "material": "C1 White - Branco",
+            "material": "Edge Banding (Com fita)",
             "loop_total": 4,
             "vertex_count": 4,
             "area_mm2": 11159.784,
@@ -3498,6 +3498,9 @@ def build_material_slot_map(obj, material_names):
     slot_map = {}
 
     for mat_name in material_names:
+        if mat_name in slot_map:
+            continue
+
         mat = ensure_material(mat_name)
         obj.data.materials.append(mat)
         slot_map[mat_name] = len(obj.data.materials) - 1

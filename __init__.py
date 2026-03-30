@@ -51,7 +51,7 @@ class OBJECT_OT_export_to_csv(bpy.types.Operator):
 # Operator para criar gaveta
 class OBJECT_OT_create_drawer(bpy.types.Operator):
     bl_idname = "object.create_drawer"
-    bl_label = "Criar gaveta"
+    bl_label = "Create Drawer"
     
     def execute(self, context):
         utils.create_drawer(context)
@@ -78,7 +78,7 @@ class OBJECT_PT_cortecloud_panel(bpy.types.Panel):
         layout.operator("object.export_to_csv", text="Export to CSV")
         
         # Botão para criar gaveta
-        layout.operator("object.create_drawer", text="Criar gaveta")
+        layout.operator("object.create_drawer", text="Create Drawer")
 
 func_options = [
     ('CONTRA_FRENTE_FUNDO_GAVETA', 'Contra Frente / Contra Fundo de Gaveta', ''),
@@ -88,7 +88,6 @@ func_options = [
     ('LATERAL_ESQUERDA', 'Lateral Esquerda', ''),
     ('TAMPO', 'Tampo', ''),
     ('BASE', 'Base', ''),
-    ('NONE', '', ''),
 ]
 
 # Função chamada quando a propriedade é alterada
@@ -98,10 +97,10 @@ def update_role_property(self, context):
 # Adicionando a propriedade de enumeração aos objetos do tipo Object
 def add_custom_enum_property():
     bpy.types.Object.funcao_enum = bpy.props.EnumProperty(
-        name="Função", 
-        description="Selecione a função da peça", 
+        name="Role",
+        description="Selecione a função da peça",
         items=func_options,
-        default='NONE',  # Definindo 'BASE' como o valor padrão
+        default='BASE',
         update=update_role_property  # Chama a função ao atualizar a enum
     )
 
@@ -119,39 +118,16 @@ class VIEW3D_PT_custom_panel(bpy.types.Panel):
 
         # Exibe a propriedade enum se o objeto estiver selecionado
         if obj is not None:
-            layout.prop(obj, "funcao_enum")
-            # Mostra também o valor atual da propriedade 'role' (opcional)
-            layout.label(text=f"Role: {obj.get('role', 'None')}")
+            if obj.type == 'MESH':
+                layout.label(text=f"Material: {utils.get_object_main_material_name(obj)}")
+                layout.label(text=f"Thickness: {utils.get_object_thickness_label(obj)}")
+                layout.label(text=f"Edge Banding: {utils.get_object_edge_banding_label(obj)}")
+            else:
+                layout.label(text="Material: Not identified")
+                layout.label(text="Thickness: Not identified")
+                layout.label(text="Edge Banding: None")
+            layout.prop(obj, "funcao_enum", text="Role")
 
-            # Adiciona dois botões para ajustar o tamanho Z
-            layout.operator("object.set_z_15", text="15mm")
-            layout.operator("object.set_z_18", text="18mm")
-
-# Define as funções dos botões
-class OBJECT_OT_set_z_15(bpy.types.Operator):
-    bl_idname = "object.set_z_15"
-    bl_label = "Set Z to 15mm"
-    
-    def execute(self, context):
-        obj = context.object
-        if obj is not None:
-            bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
-            obj.dimensions.z = 15  # Define a altura para 15mm (escala em metros)
-            bpy.ops.object.transform_apply(scale=True)
-        return {'FINISHED'}
-
-class OBJECT_OT_set_z_18(bpy.types.Operator):
-    bl_idname = "object.set_z_18"
-    bl_label = "Set Z to 18mm"
-    
-    def execute(self, context):
-        obj = context.object
-        if obj is not None:
-            bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
-            obj.dimensions.z = 18  # Define a altura para 18mm (escala em metros)
-            bpy.ops.object.transform_apply(scale=True)
-        return {'FINISHED'}
-    
 # Registro das classes do plugin
 def register():
     bpy.utils.register_class(OBJECT_OT_configure_environment)
@@ -160,8 +136,6 @@ def register():
     bpy.utils.register_class(OBJECT_OT_create_drawer)
     bpy.utils.register_class(OBJECT_PT_cortecloud_panel)
     bpy.utils.register_class(VIEW3D_PT_custom_panel)
-    bpy.utils.register_class(OBJECT_OT_set_z_15)
-    bpy.utils.register_class(OBJECT_OT_set_z_18)
     add_custom_enum_property()
 
 def unregister():
@@ -171,8 +145,6 @@ def unregister():
     bpy.utils.unregister_class(OBJECT_OT_create_drawer)
     bpy.utils.unregister_class(OBJECT_PT_cortecloud_panel)
     bpy.utils.unregister_class(VIEW3D_PT_custom_panel)
-    bpy.utils.unregister_class(OBJECT_OT_set_z_15)
-    bpy.utils.unregister_class(OBJECT_OT_set_z_18)
     del bpy.types.Object.funcao_enum
 
 if __name__ == "__main__":
