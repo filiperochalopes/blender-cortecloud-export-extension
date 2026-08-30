@@ -1,4 +1,4 @@
-import bpy, bmesh, json, os, re  # noqa: E401
+import bpy, bmesh, json, math, os, re  # noqa: E401
 
 ADDON_ROOT = os.path.dirname(os.path.dirname(__file__))
 DRAWER_PARTS_FILE = os.path.join(ADDON_ROOT, "assets", "drawer_parts.json")
@@ -578,7 +578,7 @@ def export_to_csv(filepath):
 
             # Adiciona a linha ao csv
             file.write(
-                f"{quantity};{round(cut_axes['comprimento'])};{round(cut_axes['largura'])};{sel['role'] if 'role' in sel else ''};{edge_tapes['c1']};{edge_tapes['c2']};{edge_tapes['l1']};{edge_tapes['l2']};{material};{sel.name}\n"
+                f"{quantity};{math.ceil(cut_axes['comprimento'])};{math.ceil(cut_axes['largura'])};{sel['role'] if 'role' in sel else ''};{edge_tapes['c1']};{edge_tapes['c2']};{edge_tapes['l1']};{edge_tapes['l2']};{material};{sel.name}\n"
             )
 
     file.close()
